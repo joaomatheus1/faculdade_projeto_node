@@ -11,27 +11,27 @@ class IrAnualService {
       throw Error;
     }
 
-    const baseCalculo = IrAnual.salBrutoAnual - IrAnual.irRetido - IrAnual.inss - IrAnual.dependentes * IrDep.dependentes * anual.meses;
+    const baseCalculo = IrAnual.salBrutoAnual - IrAnual.irRetido - IrAnual.inss - IrAnual.dependentes * IrDep.DEPENDENTES * anual.MESES;
 
     if (baseCalculo <= 22847.76) {
       IrAnual.aliquota =  "isento";
       IrAnual.resultadoImpostoAnual = Number(baseCalculo * IrEnumPercent.ZERO_RANGE);
     } else if (baseCalculo >= 22847.77 && baseCalculo <= 33919.8) {
       IrAnual.aliquota =  "7.5%";
-      IrAnual.resultadoImpostoAnual = Number((baseCalculo * IrEnumPercent.FIRST_RANGE - taxasDeducaoAnual.taxaONE).toFixed(2)
+      IrAnual.resultadoImpostoAnual = Number((baseCalculo * IrEnumPercent.FIRST_RANGE - taxasDeducaoAnual.TAXA_ONE).toFixed(2)
       );
     } else if (baseCalculo >= 33919.81 && baseCalculo <= 45012.6) {
 
       IrAnual.aliquota = "15%";
-      IrAnual.resultadoImpostoAnual = Number((baseCalculo * IrEnumPercent.SECOND_RANGE - taxasDeducaoAnual.taxaSECOND).toFixed(2)
+      IrAnual.resultadoImpostoAnual = Number((baseCalculo * IrEnumPercent.SECOND_RANGE - taxasDeducaoAnual.TAXA_SECOND).toFixed(2)
       );
     } else if (baseCalculo >= 45012.61 && baseCalculo <= 55976.16) {
       IrAnual.aliquota = "22.5%";
-      IrAnual.resultadoImpostoAnual = Number((baseCalculo * IrEnumPercent.THIRD_RANGE - taxasDeducaoAnual.taxaTHIRD).toFixed(2)
+      IrAnual.resultadoImpostoAnual = Number((baseCalculo * IrEnumPercent.THIRD_RANGE - taxasDeducaoAnual.TAXA_THIRD).toFixed(2)
       );
     } else {
       IrAnual.aliquota = "27.5%"
-      IrAnual.resultadoImpostoAnual = Number((baseCalculo * IrEnumPercent.FOURTY_RANGE - taxasDeducaoAnual.taxaFOURTY).toFixed(2)
+      IrAnual.resultadoImpostoAnual = Number((baseCalculo * IrEnumPercent.FOURTY_RANGE - taxasDeducaoAnual.TAXA_FOURTY).toFixed(2)
       );
     }
 

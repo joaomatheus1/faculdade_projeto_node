@@ -8,7 +8,7 @@ class IrNaFonteService {
     if (IrFonte.salBruto <= 0 || IrFonte.pensaoAlimenticia < 0 || IrFonte.dependentes < 0 || isNaN(IrFonte.salBruto) || isNaN(IrFonte.pensaoAlimenticia) ||
       isNaN(IrFonte.dependentes) || isBoolean(IrFonte.dependentes) || isBoolean(IrFonte.salBruto) || isBoolean(IrFonte.pensaoAlimenticia)) {
 
-      throw Error;
+      throw Error; //Caso entre na condição, anula todos os blocos abaixo
     }
 
     function calculoInss(IrFonte: IrFonteModel) {
@@ -42,12 +42,11 @@ class IrNaFonteService {
       } else if (!calculated) {
         valor += (6433.57 - 3305.23) * IrFonteEnumInss.FOURTY_PERCENT;
       }
-      return valor;
+      return valor; //Resultado do inss
     }
 
-    const inss = calculoInss(IrFonte);
-    const baseSalarial = IrFonte.salBruto - inss - IrFonte.pensaoAlimenticia - (IrFonte.dependentes * IrDep.dependentes);
-    IrFonte.inss = Number(inss.toFixed(2))
+    const baseSalarial = IrFonte.salBruto - calculoInss(IrFonte) - IrFonte.pensaoAlimenticia - (IrFonte.dependentes * IrDep.DEPENDENTES);
+    IrFonte.inss = Number(calculoInss(IrFonte).toFixed(2))// Recebendo o resultado do inss para mostrar no POST
     
     if (baseSalarial <= 1903.98) {
       IrFonte.resultadoIrFonte = baseSalarial * IrEnumPercent.ZERO_RANGE;

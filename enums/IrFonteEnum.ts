@@ -18,7 +18,7 @@ enum IrFonteEnumDeducao {
 }
 
 enum IrDep {
-    dependentes = 189.59
+    DEPENDENTES = 189.59
 
 }
 

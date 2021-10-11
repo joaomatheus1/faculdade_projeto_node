@@ -15,7 +15,7 @@ class PisController {
       const pisService = new PisService
       pis.resultadoImposto = await pisService.calcularPis(pis)
 
-      return res.send({ Resultado: pis.resultadoImposto });
+      return res.send({ pis });
     } catch (e) {
       res.status(400).json({ error: "Escreva um número mês válido !" });
     }
